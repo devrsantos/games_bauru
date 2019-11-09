@@ -1,11 +1,8 @@
 module.exports = (app) => {
-  
-  app.post("/cadClientes", (req, res) => {
-    app.src.controllers.clientes.cadClientes(app, req, res);
-  }),
-
-  app.get("/consultarCliente", (req, res) => {
-  	app.src.controllers.clientes.consultCliente(app, req, res);
-  })
-
+	app.post("/cadastrarCliente", (request, response) => {
+		app.src.controllers.clientes.cadastrarCliente(app, request, response);
+  	}),
+  	app.get("/consultarCliente", (request, response) => {
+  		app.src.controllers.clientes.consultarCliente(app, request, response);
+  	})
 };

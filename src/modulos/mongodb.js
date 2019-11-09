@@ -1,29 +1,56 @@
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 const { usuario, password } = require('./../models/keys');
-const { cadastrarUsuario, consultarUsuario } = require('./functionsMongo');
+const { 
+	cadastrarCliente,
+	consultarCliente,
+	cadastrarProduto,
+	consultarProduto,
+	cadastrarFuncionario,
+	consultarFuncionario
+} = require('./functionsMongo');
 
 const metodos = {
 	url: `mongodb://${usuario}:${password}@ds141228.mlab.com:41228/games_bauru`,
 	dbName: "games_bauru",
 };
 
-const functionsMongo = (funcao, dadosUsuario, res) => {
+const functionsMongo = (funcao, dado, response) => {
 	MongoClient.connect(metodos.url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
 		const db = client.db(metodos.dbName);
 
-		if (['cadastrarUsuario', 'consultarUsuario'].includes(funcao)) {
+		if ([
+			'cadastrarCliente',
+			'consultarCliente',
+			'cadastrarProduto',
+			'consultarProduto', 
+			'cadastrarFuncionario', 
+			'consultarFuncionario'
+		].includes(funcao)) {
 			
-			if (funcao == 'cadastrarUsuario') {
-				cadastrarUsuario(db, dadosUsuario, res);
+			if (funcao == 'cadastrarCliente') {
+				cadastrarCliente(db, dado, response);
 			}
 
-			if (funcao == 'consultarUsuario') {
-				consultarUsuario(db, dadosUsuario, res);
+			if (funcao == 'consultarCliente') {
+				consultarCliente(db, dado, response);
+			}
+
+			if (funcao == 'cadastrarProduto') {
+				cadastrarProduto(db, dado, response);
 			}
 			
-		} else {
-			res.status(400).send({"Erro": "Função Indisponivel"});
-		};
+			if (funcao == 'consultarProduto') {
+				consultarProduto(db, dado, response);
+			}
+
+			if (funcao == 'cadastrarFuncionario') {
+				cadastrarFuncionario(db, dado, response)
+			}
+			
+			if (funcao == 'consultarFuncionario') {
+				consultarFuncionario(db, dado, response)
+			}
+		}
 
 		client.close();
 	});

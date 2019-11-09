@@ -2,43 +2,43 @@ const functionsMongo = require('./../modulos/mongodb');
 
 module.exports = {
 
-	cadClientes: (req, res) => {
+	cadClientes: (request, response) => {
 		
-		const dadosUsuario = {
-			nome: req.body.nome,
-			cpf: req.body.cpf,
-			rg: req.body.rg,
-			residencia: req.body.residencia,
-			nascimento: req.body.nascimento,
-			telefone: req.body.telefone,
-			email: req.body.email,
-			login: req.body.login,
-			senha: req.body.senha,
+		const usuarioCadastrado = {
+			nome: request.body.nome,
+			cpf: request.body.cpf,
+			rg: request.body.rg,
+			residencia: request.body.residencia,
+			nascimento: request.body.nascimento,
+			telefone: request.body.telefone,
+			email: request.body.email,
+			login: request.body.login,
+			senha: request.body.senha,
 		};
 
-		functionsMongo('cadastrarUsuario', dadosUsuario, res);
+		functionsMongo('cadastrarCliente', usuarioCadastrado, response);
 	},
 
-	consultCliente: (req, res) => {
+	consultarCliente: (request, response) => {
 		
-		for(let key in req.body) {
+		for(let key in request.body) {
 
 			if (key != 'undefined') {
 
 				if (key == 'login') {
-					const login = req.body.login;
-					functionsMongo('consultarUsuario', {login}, res);	
+					const login = request.body.login;
+					functionsMongo('consultarCliente', {login}, response);	
 				} else if (key == 'cpf') {
-					const cpf = req.body.cpf;
-					functionsMongo('consultarUsuario', {cpf}, res);
+					const cpf = request.body.cpf;
+					functionsMongo('consultarCliente', {cpf}, response);
 				} else if (key == 'email') {
-					const email = req.body.email;
-					functionsMongo('consultarUsuario', {email}, res);
+					const email = request.body.email;
+					functionsMongo('consultarCliente', {email}, response);
 				}
 				
 			}
 
-		};
+		}
 
 	}
 

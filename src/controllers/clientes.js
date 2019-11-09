@@ -1,11 +1,8 @@
 module.exports = {
-
-  cadClientes: (app, req, res) => {
-  	app.src.models.clientes.cadClientes(req, res);
+  cadastrarCliente: (app, request, response) => {
+  	app.src.models.clientes.cadastrarCliente(request, response);
   },
-
-  consultCliente: (app, req, res) => {
-  	app.src.models.clientes.consultCliente(req, res);
+  consultarCliente: (app, request, response) => {
+  	app.src.models.clientes.consultarCliente(request, response);
   }
-  
 };
